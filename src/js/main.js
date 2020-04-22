@@ -12,7 +12,7 @@ async function validate_url (requestDetails){
 
     url_in_database(url)
         .then(function (reponse) {
-            console.log("malicious");
+            console.log("Malicious URls: ",url);
             chrome.notifications.create('blocked',notificationOpts)
             chrome.tabs.getSelected(null,function(tab) {
                 chrome.tabs.remove(tab.id, function() { });
@@ -31,9 +31,11 @@ chrome.alarms.create('DownloadListOfMaliciousDomains', {
 });
 
 chrome.alarms.onAlarm.addListener(function(alarm) {
-    deleteDB()
-    createDB()
     fetch(phishtank_url,{redirect: 'follow', mode: 'cors'})
         .then(response => response.json())
-        .then(json => json.map(function (entry) { addData(entry["url"]) }));
+        .then(json => {
+            deleteDB()
+            createDB()
+            json.map(function (entry) { addData(entry["url"]) })
+        });
 });

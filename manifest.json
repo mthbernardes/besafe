@@ -1,13 +1,14 @@
 {
-    "name": "block-malicious",
+    "name": "BeSafe",
     "version": "1.0",
-    "description": "Block malicious sites",
+    "description": "Block malicious websites",
     "permissions": [
         "tabs",
         "alarms",
+        "activeTab",
+        "webRequest",
         "http://*/*",
         "https://*/*",
-        "webRequest",
         "notifications",
         "unlimitedStorage"],
         "background": {
@@ -15,6 +16,10 @@
             ["src/js/database.js","src/js/main.js"],
             "persistent": true
         },
+        "browser_action": {
+            "default_icon": "imgs/icon.png"
+        },
+
         "manifest_version": 2
 }
 
