@@ -23,7 +23,7 @@ async function validate_url (requestDetails){
         })
 }
 
-chrome.webRequest.onBeforeRequest.addListener( validate_url , {urls: ["<all_urls>"]});
+chrome.webRequest.onBeforeRequest.addListener( validate_url , {urls: ["http://*/*","https://*/*"]});
 
 chrome.alarms.create('DownloadListOfMaliciousDomains', {
     when: Date.now(),
