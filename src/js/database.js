@@ -63,6 +63,7 @@ function createDB(){
     openRequest.onupgradeneeded = function(e) {
         var thisDb = e.target.result;
         if(!thisDb.objectStoreNames.contains("malicious-urls")) {
+            deleteDB()
             var objectStore = thisDb.createObjectStore("malicious-urls", { keyPath: "id", autoIncrement:true });  
             objectStore.createIndex("url","url", {unique:true});		            
             result = true;

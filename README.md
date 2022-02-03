@@ -1,2 +1,2 @@
 # besafe
-Chrome extension which block access to malicious websites.
+Chrome extension which blocks access to malicious websites.

@@ -5,11 +5,9 @@
     "permissions": [
         "tabs",
         "alarms",
-        "activeTab",
         "webRequest",
         "http://*/*",
         "https://*/*",
-        "notifications",
         "unlimitedStorage"],
         "background": {
             "scripts": 
@@ -22,4 +20,3 @@
 
         "manifest_version": 2
 }
-
