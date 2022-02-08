@@ -3,20 +3,19 @@
     "version": "1.0",
     "description": "Block malicious websites",
     "permissions": [
-        "tabs",
         "alarms",
         "webRequest",
-        "http://*/*",
-        "https://*/*",
-        "unlimitedStorage"],
-        "background": {
-            "scripts": 
-            ["src/js/database.js","src/js/main.js"],
-            "persistent": true
-        },
-        "browser_action": {
-            "default_icon": "imgs/icon.png"
-        },
-
-        "manifest_version": 2
+        "unlimitedStorage"
+        ],
+    "host_permissions": [
+         "*://*/*"
+      ],
+    "background": {
+        "service_worker": "src/js/index.js",
+        "type": "module"
+    },
+    "action": {
+        "default_icon": "imgs/icon.png"
+    },
+    "manifest_version": 3
 }
