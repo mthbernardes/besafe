@@ -5,7 +5,8 @@
     "permissions": [
         "alarms",
         "webRequest",
-        "unlimitedStorage"
+        "unlimitedStorage",
+        "storage"
         ],
     "host_permissions": [
          "*://*/*"
@@ -15,7 +16,8 @@
         "type": "module"
     },
     "action": {
-        "default_icon": "imgs/icon.png"
+        "default_icon": "imgs/icon.png",
+        "default_popup": "src/popup.html"
     },
     "manifest_version": 3
 }
