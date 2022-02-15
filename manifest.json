@@ -1,6 +1,6 @@
 {
     "name": "BeSafe",
-    "version": "1.0",
+    "version": "1.1",
     "description": "Block malicious websites",
     "permissions": [
         "alarms",
@@ -19,5 +19,5 @@
         "default_icon": "imgs/icon.png",
         "default_popup": "src/popup.html"
     },
-    "manifest_version": 4
+    "manifest_version": 3
 }
