@@ -24,9 +24,6 @@ export function addMaliciousUrlToDb(url) {
         const transaction = db.transaction(["malicious-urls"], "readwrite");
         const objectStore = transaction.objectStore("malicious-urls");
         const req = objectStore.add({ url: url });
-        //req.onsuccess = function () {
-        //    console.log("Data added");
-        //};
         transaction.commit();
     }
 }
