@@ -1,6 +1,7 @@
 // database actions
-import { addMaliciousUrlToDb, createDB } from './database.js';
-import { urlInDatabase } from './lookup.js';
+import { addMaliciousUrlToDb, createDB } from "./database.js";
+import { urlInDatabase } from "./lookup.js";
+
 
 async function validateUrl(requestDetails) {
     const { url } = requestDetails;
@@ -18,13 +19,14 @@ async function validateUrl(requestDetails) {
 
 function controllerDatabase(alarm) {
     const phishtank_url = "https://180s-public.s3.us-east-2.amazonaws.com/infosec/phishing/database.json";
+    chrome.action.setBadgeText({ text: "..." });
 
-    fetch(phishtank_url, { redirect: 'follow', mode: 'cors' })
+    fetch(phishtank_url, { redirect: "follow", mode: "cors" })
         .then(response => response.json())
         .then(json => {
             createDB();
             json.map((entry) => { addMaliciousUrlToDb(entry["url"]) })
-        });
+        }).then(_ => chrome.action.setBadgeText({ text: "" }));
 }
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -35,7 +37,7 @@ chrome.alarms.onAlarm.addListener(controllerDatabase);
 
 chrome.webRequest.onBeforeRequest.addListener(validateUrl, { urls: ["<all_urls>"] });
 
-chrome.alarms.create('DownloadListOfMaliciousDomains', {
+chrome.alarms.create("DownloadListOfMaliciousDomains", {
     when: Date.now(),
     periodInMinutes: 60
 });
@@ -44,4 +46,4 @@ function keepServiceRunning() {
     setTimeout(keepServiceRunning, 2000);
 }
 
-keepServiceRunning()
+keepServiceRunning();
