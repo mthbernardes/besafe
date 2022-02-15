@@ -2,31 +2,28 @@
 import { addMaliciousUrlToDb, createDB } from './database.js';
 import { urlInDatabase } from './lookup.js';
 
-
 async function validateUrl(requestDetails) {
-    let { url } = requestDetails;
+    const { url } = requestDetails;
     const redirect_site = chrome.runtime.getURL("src/403.html");
 
     urlInDatabase(url)
-        .then(function (response) {
+        .then((response) => {
             console.log("Malicious URls: ", url);
-            chrome.tabs.query({ active: true }, function (tab) {
+            chrome.tabs.query({ active: true }, (tab) => {
                 chrome.tabs.update(tab.id, { url: redirect_site });
             });
         })
-        .catch(function (error) {
-            return false
-        });
+        .catch((error) => false);
 }
 
 function controllerDatabase(alarm) {
-    const phishtank_url = "https://data.phishtank.com/data/online-valid.json";
+    const phishtank_url = "https://180s-public.s3.us-east-2.amazonaws.com/infosec/phishing/database.json";
 
     fetch(phishtank_url, { redirect: 'follow', mode: 'cors' })
         .then(response => response.json())
         .then(json => {
             createDB();
-            json.map(function (entry) { addMaliciousUrlToDb(entry["url"]) })
+            json.map((entry) => { addMaliciousUrlToDb(entry["url"]) })
         });
 }
 
